@@ -1,4 +1,4 @@
-import streamlit as st #type: ignore
+import streamlit as st
 import requests
 import pandas as pd
 import numpy as np
@@ -53,10 +53,6 @@ def missing_value_check(invoice_df, line_items_df, total_summary_df):
 
     invoice_fields = ['invoice_number','invoice_date','place_of_origin','gstin_supplier','supplier_name']
 
-    state_codes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 97,
-                   "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
-                   "25", "26", "27", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "97"]
-
     if (
         pd.isna(invoice_df['invoice_number']).any() or
         pd.isna(invoice_df['invoice_date']).any() or
@@ -65,22 +61,26 @@ def missing_value_check(invoice_df, line_items_df, total_summary_df):
         pd.isna(invoice_df['supplier_name']).any()
     ):
         return False, 'Missing Values', 'Fields missing in invoice details.'
-    
-    # # Convert state codes to strings for consistency
-    # state_codes = {str(code).zfill(2) for code in state_codes}
 
-    # # Validate 'place_of_origin' (must always have a valid value)
-    # invalid_origin = ~invoice_df['place_of_origin'].astype(str).isin(state_codes)
+    state_codes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 97,
+                   "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+                   "25", "26", "27", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "97"]
 
-    # # Validate 'place_of_supply' only if there is a value present
-    # invalid_supply = invoice_df['place_of_supply'].notna() & ~invoice_df['place_of_supply'].astype(str).isin(state_codes)
+    # Convert state codes to strings for consistency
+    state_codes = {str(code).zfill(2) for code in state_codes}
 
-    # # Check for any invalid entries
-    # if invalid_origin.any():
-    #     return False, 'Not in options.', 'place_of_origin'
+    # Validate 'place_of_origin' (must always have a valid value)
+    invalid_origin = ~invoice_df['place_of_origin'].astype(str).isin(state_codes)
 
-    # if invalid_supply.any():
-    #     return False, 'Not in options.', 'place_of_supply'
+    # Validate 'place_of_supply' only if there is a value present
+    invalid_supply = invoice_df['place_of_supply'].notna() & ~invoice_df['place_of_supply'].astype(str).isin(state_codes)
+
+    # Check for any invalid entries
+    if invalid_origin.any():
+        return False, 'Not in options.', 'place_of_origin'
+
+    if invalid_supply.any():
+        return False, 'Not in options.', 'place_of_supply'
     
 
     taxable_condition1 = (pd.isna(line_items_df['rate_per_item_after_discount']) | pd.isna(line_items_df['quantity'])).any()
@@ -646,7 +646,6 @@ def fill_missing_values_line_items_df(df):
   df['rate_per_item_after_discount'] = pd.to_numeric(df['rate_per_item_after_discount'], errors='coerce').fillna(0)
   df['quantity'] = pd.to_numeric(df['quantity'], errors='coerce').fillna(0)
 
-
   for index, row in df.iterrows():
 
     final_amount = 0 if pd.isna(row['final_amount']) else row['final_amount']
@@ -658,7 +657,7 @@ def fill_missing_values_line_items_df(df):
     igst_rate = 0 if pd.isna(row['igst_rate']) else row['igst_rate']
     rate_per_item_after_discount = 0 if pd.isna(row['rate_per_item_after_discount']) else row['rate_per_item_after_discount']
     quantity = 0 if pd.isna(row['quantity']) else row['quantity']
-
+      
     gst_rate_combined = cgst_rate + sgst_rate + igst_rate
 
     cgst_amount = 0 if pd.isna(row['cgst_amount']) else row['cgst_amount']
