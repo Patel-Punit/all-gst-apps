@@ -17,7 +17,7 @@ def main():
     elif app_selection == "JSON App":
         json_main()
     elif app_selection == "Reconcile App":
-        reconcile_main
+        reconcile_main()
 
 if __name__ == "__main__":
     main()
