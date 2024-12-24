@@ -55,16 +55,16 @@ def json_main():
         # Validate GSTINs
         if not gstins or len(set(gstins)) != 1:
             # st.warning("Could not extract a valid GSTIN from the uploaded files or GSTINs do not match.")
-            supplier_gstin = st.text_input("Please enter the Supplier's GSTIN manually:")
-            if supplier_gstin and len(supplier_gstin) == 15:
-                st.success(f"Supplier's GSTIN set to: {supplier_gstin}")
+            gstin = st.text_input("Please enter the Supplier's GSTIN manually:")
+            if gstin and len(gstin) == 15:
+                st.success(f"Supplier's GSTIN set to: {gstin}")
             else:
                 # st.error("Invalid GSTIN entered. Please try again.")
                 return
         else:
-            supplier_gstin = gstins[0]
+            gstin = gstins[0]
             # st.success(f"Supplier's GSTIN extracted: {supplier_gstin}")
-            st.text_input("Change Supplier's GSTIN if required:", value=supplier_gstin)
+            st.text_input("Change Supplier's GSTIN if required:", value=gstin)
 
         if not b2b.empty or not b2cs.empty:
             final_json = get_dict(gstin, month, year, b2b, b2cs)
