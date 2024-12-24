@@ -170,7 +170,7 @@ def select_columns_from_known_source(df, needed_columns, source):
 
 def format_place_of_supply(df):
     for index, row in df.iterrows():
-        place_of_supply = row['Place Of Supply']
+        place_of_supply = str(row['Place Of Supply'])
 
         if place_of_supply in state_mis_match_mapping.keys():
             place_of_supply = state_mis_match_mapping[place_of_supply]
