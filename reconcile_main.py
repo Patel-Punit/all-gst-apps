@@ -56,21 +56,18 @@ def reconcile_main():
         customer_df['State/UT Tax'] = customer_df['State/UT Tax'].replace(0, pd.NA)
 
         customer_df['Invoice Value(₹)'] = pd.to_numeric(customer_df['Invoice Value(₹)'], errors='coerce').round(2)
-        customer_df['Place of supply'] = pd.to_numeric(customer_df['Place of supply'], errors='coerce').round(2)
         customer_df['Taxable Value'] = pd.to_numeric(customer_df['Taxable Value'], errors='coerce').round(2)
         customer_df['Integrated Tax'] = pd.to_numeric(customer_df['Integrated Tax'], errors='coerce').round(2)
         customer_df['Central Tax'] = pd.to_numeric(customer_df['Central Tax'], errors='coerce').round(2)
         customer_df['State/UT Tax'] = pd.to_numeric(customer_df['State/UT Tax'], errors='coerce').round(2)
 
         current_df['Invoice Value(₹)'] = pd.to_numeric(current_df['Invoice Value(₹)'], errors='coerce').round(2)
-        current_df['Place of supply'] = pd.to_numeric(current_df['Place of supply'], errors='coerce').round(2)
         current_df['Taxable Value'] = pd.to_numeric(current_df['Taxable Value'], errors='coerce').round(2)
         current_df['Integrated Tax'] = pd.to_numeric(current_df['Integrated Tax'], errors='coerce').round(2)
         current_df['Central Tax'] = pd.to_numeric(current_df['Central Tax'], errors='coerce').round(2)
         current_df['State/UT Tax'] = pd.to_numeric(current_df['State/UT Tax'], errors='coerce').round(2)
 
         next_df['Invoice Value(₹)'] = pd.to_numeric(next_df['Invoice Value(₹)'], errors='coerce').round(2)
-        next_df['Place of supply'] = pd.to_numeric(next_df['Place of supply'], errors='coerce').round(2)
         next_df['Taxable Value'] = pd.to_numeric(next_df['Taxable Value'], errors='coerce').round(2)
         next_df['Integrated Tax'] = pd.to_numeric(next_df['Integrated Tax'], errors='coerce').round(2)
         next_df['Central Tax'] = pd.to_numeric(next_df['Central Tax'], errors='coerce').round(2)
