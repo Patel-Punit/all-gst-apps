@@ -9,6 +9,8 @@ def reconcile_main():
     st.title('Reconciliation')
     uploaded_files = st.file_uploader("Upload portal data in Excel & customer data in csv.", accept_multiple_files=True, type=['xlsx', 'xls', 'csv'])
 
+    st.button('Re-run')
+
     if uploaded_files:
         current_df, next_df, customer_df = create_dataframes(uploaded_files)
 
@@ -73,10 +75,21 @@ def reconcile_main():
         next_df['Central Tax'] = pd.to_numeric(next_df['Central Tax'], errors='coerce').round(2)
         next_df['State/UT Tax'] = pd.to_numeric(next_df['State/UT Tax'], errors='coerce').round(2)
 
+        st.write(current_df)
+        st.write(next_df)
+        st.write(customer_df)
+
         result_df = mark_existance_of_invoices(current_df, next_df, customer_df)
         result_df = add_values(result_df, current_df, next_df, customer_df)
         result_df = flag_mismatch(result_df, current_df, next_df, customer_df)
+
+        st.write('before final flag')
+        st.write(result_df)
+
         result_df = flag_matched_or_check(result_df)
+
+        st.write('final_output')
+        st.write(result_df)
 
         # Convert DataFrame to CSV
         csv_data = convert_df_to_csv(result_df)
