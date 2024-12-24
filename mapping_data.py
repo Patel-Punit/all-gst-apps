@@ -1,5 +1,7 @@
 # Define necessary data structures
-known_sources = ['Select an option', 'Zoho Books B2B,Export Sales Data', 'Kithab Sales Report', 'Amazon', 'Flipkart - 7(A)(2)', 'Flipkart - 7(B)(2)', 'Meesho','b2b ready to file format','b2cs ready to file format','VS internal format','Amazon B2B','Vyapaar','Jio Mart']
+known_sources = ['Select an option', 'Zoho Books B2B,Export Sales Data', 'Kithab Sales Report', 'Amazon', 'Flipkart - 7(A)(2)',
+                 'Flipkart - 7(B)(2)', 'Meesho','b2b ready to file format','b2cs ready to file format','VS internal format',
+                 'Amazon B2B','Vyapaar','Jio Mart', 'PDF extractor']
 
 known_source_relevenat_columns = {
       'Zoho Books B2B,Export Sales Data': {
@@ -14,6 +16,17 @@ known_source_relevenat_columns = {
           'SubTotal' : 'Taxable Value',
           'Item Tax Amount' : 'Tax amount',
           'GST Treatment' : 'GST treatment'
+      },
+      'PDF extractor': {
+        'gstin_recipient': 'GSTIN/UIN of Recipient',
+        'receiver_name': 'Receiver Name',
+        'gstin_supplier': 'GSTIN/UIN of Supplier',
+        'invoice_number': 'Invoice Number',
+        'invoice_date': 'Invoice date',
+        'invoice_value': 'Invoice Value',
+        'place_of_supply': 'Place Of Supply',
+        'tax_rate': 'Rate',
+        'taxable_value': 'Taxable Value'  
       },
       "HSN ready to file": {
           "HSN":"HSN",
