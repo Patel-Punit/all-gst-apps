@@ -226,7 +226,7 @@ def flag_matched_or_check(result_df):
     # Define the logic for 'Matched' and 'Check'
     def determine_status(row):
         # Check if 'exists_in' contains exactly 'customer_date' and 'current_month'
-        exists_in_condition = sorted(row['exists_in']) == ['current_month', 'customer_date']
+        exists_in_condition = sorted(row['exists_in']) == ['current_month', 'customer_data']
 
         # Check if 'mismatches' is None (no mismatches)
         no_mismatch_condition = row['mismatches'] is None
