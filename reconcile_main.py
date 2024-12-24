@@ -9,8 +9,6 @@ def reconcile_main():
     st.title('Reconciliation')
     uploaded_files = st.file_uploader("Upload portal data in Excel & customer data in csv.", accept_multiple_files=True, type=['xlsx', 'xls', 'csv'])
 
-    st.button('Re-run')
-
     if uploaded_files:
         current_df, next_df, customer_df = create_dataframes(uploaded_files)
 
